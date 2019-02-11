@@ -7,9 +7,14 @@ class Conveyor:
         self.worker_time_required = worker_time_required
         self.worker_group = Conveyor.get_workers(belt_length, slot_time, worker_time_required)
         self.belt_length = belt_length
-        self.belt_slots = [Conveyor.product_generation(), Conveyor.product_generation(), Conveyor.product_generation() ]
+        self.belt_slots = Conveyor.create_belt_slot(belt_length)
         self.report = Report(steps)
-
+    @staticmethod
+    def create_belt_slot(belt_length):
+        slots = []
+        for i in range(belt_length):
+            slots.append(Conveyor.product_generation())
+        return slots
     @staticmethod
     def get_workers(slots, slot_time, time_required):
         workerGroup = []
